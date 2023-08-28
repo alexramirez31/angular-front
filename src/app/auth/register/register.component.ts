@@ -16,12 +16,14 @@ export class RegisterComponent  {
 
   public registerForm= this.fb.group({
 
-    nombre:['sergio',[Validators.required]],
-    email:['sergio@gmail.com',[Validators.required,Validators.email]],
-    password:['123456',[Validators.required]],
-    password2:['123456',[Validators.required]],
+    nombre:['',[Validators.required]],
+    email:['',[Validators.required,Validators.email]],
+    password:['',[Validators.required]],
+    password2:['',[Validators.required]],
     role:['',[Validators.required]],
-  })
+  },{
+    Validators:this.passwordsIguales('password','password2')
+  });
 
   
 
@@ -55,5 +57,37 @@ export class RegisterComponent  {
       onlySelt:true
     })
 
+  }
+
+  campoNoValido(campo:string): boolean{
+    if(this.registerForm.get(campo).invalid && this.formSubmited){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
+  contrasenasNoValidas(){
+    const pass1=this.registerForm.get('password').value;
+    const pass2=this.registerForm.get('password2').value;
+    if((pass1 !=pass2) && this.formSubmited){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  passwordsIguales(pass1Name: string,pass2Name:string){
+    return (FormGroup: FormGroup)=>{
+      const pass1Control = FormGroup.get(pass1Name);
+      const pass2Control = FormGroup.get(pass2Name);
+
+      if (pass1Control.value == pass2Control.value){
+        pass2Control.setErrors(null);
+      }else{
+        pass2Control.setErrors({noEsIgual:true});
+      }
+    }
   }
 }
