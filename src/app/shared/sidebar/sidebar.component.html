@@ -25,7 +25,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview" *ngFor="let item of menuItems">
-          <a href="#" class="nav-link ">
+          <a  class="nav-link " style="cursor: pointer;">
             <i class="{{item.icono}}"></i>
             <p class="ml-2">
               {{item.titulo}}
@@ -43,7 +43,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link ">
+          <a (click)="logout()" class="nav-link " style="cursor: pointer;">
             <i class="fas fa-sign-out-alt"></i>
             <p class="ml-2">
               Logout

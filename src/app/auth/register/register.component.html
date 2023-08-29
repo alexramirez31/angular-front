@@ -6,12 +6,12 @@
 
     <div class="card ">
       <div class="card-body register-card-body">
-        <p class="login-box-msg">Registrar Nuevo Uusuario</p>
+        <p class="login-box-msg">Registrar Nuevo Usuario</p>
 
         <form (ngSubmit)="crearUsuario()" [formGroup]="registerForm">
 
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Full name" formControlName="nombre">
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user" style="color: rgb(48, 37, 37);"></span>
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Retype password" formControlName="password2">
+            <input type="password" class="form-control" placeholder="Reescriba Password" formControlName="password2">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock" style="color: rgb(48, 37, 37);"></span>
@@ -61,7 +61,7 @@
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-outline-secondary btn-block">Register</button>
+              <button type="submit" class="btn btn-outline-secondary btn-block">Registrar</button>
             </div>
             <!-- /.col -->
           </div>
