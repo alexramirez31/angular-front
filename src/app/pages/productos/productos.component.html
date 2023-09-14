@@ -1,20 +1,114 @@
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Productos</h3>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Lista de Productos</h3> <br>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarProducto">
+              <i class="fas fa-user-plus"></i> Agregar
+            </button>
+          </div>
 
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-        <i class="fas fa-minus"></i></button>
-      <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-        <i class="fas fa-times"></i></button>
-    </div>
-  </div>
-  <div class="card-body">
-    Start creating your amazing application!
-  </div>
-  <!-- /.card-body -->
-  <div class="card-footer">
-    Footer
-  </div>
-  <!-- /.card-footer-->
-</div>
+          <div class="card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Nombre</th>
+                  <th>Categoria</th>
+                  <th>stock</th>
+                  <th>imagen</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let usuario of productos; let i= index;">
+                  <td>{{i+1}}</td>
+                  <td>{{usuario.nombre}}</td>
+                  <td>{{usuario.email}}</td>
+                  <td><button class="btn btn-primary btn-xs" (click)="cambiarPass(usuario.id)"><i class="fas fa-key"></i> Cambio Password </button></td>
+                  <td>{{usuario.role}}</td>
+                  <td><button class="btn btn-warning btn-xs mr-2" (click)="llenarForm(usuario.id)"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-danger btn-xs" (click)="eliminarUsuario(usuario.id)"><i class="fas fa-trash-alt"></i></button>
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+       <!-- Modal agregar Producto -->
+       <div class="modal fade" id="agregarProducto">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Agregar Categorias</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="crearProducto()" [formGroup]="productoForm" autocomplete="off">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Categoria" formControlName="categoria">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Stock" formControlName="stock">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <label>Elegir Imagen</label>
+                  <input type="file" class="form-control-file"  formControlName="image" accept="image/*" (change)="selectImage($event)">
+                  <!-- <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div> -->
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="card">
+                    <img class="card-img-top" [src]="imgURL" >
+                  </div>
+
+                  
+                </div>
+
+                <div class="row">
+                  <div class="col-8">
+                    <div class="col text-danger">
+                      <p *ngIf="campoNoValido('nombre')"> El Nombre es obligatorio</p>
+                      <p *ngIf="campoNoValido('categoria')"> El Descripcion es obligatorio</p>
+                      <p *ngIf="campoNoValido('stock')"> El Nombre es obligatorio</p>
+                      <p *ngIf="campoNoValido('image')"> El Descripcion es obligatorio</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

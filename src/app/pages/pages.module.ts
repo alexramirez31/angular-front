@@ -7,6 +7,10 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { StockComponent } from './stock/stock.component';
+import { DataTablesModule } from 'angular-datatables';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ExtensionesComponent } from './extensiones/extensiones.component';
+import { CategoriasComponent } from './categorias/categorias.component';
 
 
 
@@ -18,6 +22,8 @@ import { StockComponent } from './stock/stock.component';
     ProductosComponent,
     PagesComponent,
     StockComponent,
+    ExtensionesComponent,
+    CategoriasComponent,
   ],
   exports: [
     DashboardComponent,
@@ -29,7 +35,10 @@ import { StockComponent } from './stock/stock.component';
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    DataTablesModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

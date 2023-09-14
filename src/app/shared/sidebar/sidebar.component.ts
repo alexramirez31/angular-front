@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
-import  * as $ from 'jquery'
+
 import { Router } from '@angular/router';
 
 declare var $:any;
@@ -13,10 +13,18 @@ declare var $:any;
 })
 export class SidebarComponent implements OnInit {
 
-  menuItems: any[];
+  perfil = localStorage.getItem('nombre');
+
+  menuItems: any[]; //dasboard
+  menuItems1: any[]; //usuarios
+  menuItems2: any[]; //categorias
+  menuItems3: any[]; //productos
   constructor(private sidebarService: SidebarService,private router: Router) {
 
     this.menuItems = sidebarService.menu;
+    this.menuItems1= sidebarService.menu1;
+    this.menuItems2= sidebarService.menu2;
+    this.menuItems3= sidebarService.menu3;
     console.log(this.menuItems);
 
   }
@@ -27,6 +35,8 @@ export class SidebarComponent implements OnInit {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('usuarioId');
+    localStorage.removeItem('nombre');
     this.router.navigateByUrl('/login');
   }
 

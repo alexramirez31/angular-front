@@ -29,7 +29,8 @@ export class LoginComponent  {
      }
 
      this.router.navigateByUrl('/dashboard');
-    
+    // this.router.navigateByUrl('/dashboard/usuarios');
+
     },(err)=>{
       Swal.fire('Error',err.error.message,'error');
     });

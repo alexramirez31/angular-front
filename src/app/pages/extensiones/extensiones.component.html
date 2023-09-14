@@ -1,0 +1,181 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Lista de Extensiones</h3> <br>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuario">
+                <i class="fas fa-user-plus"></i> Agregar
+              </button>
+            </div>
+  
+            <div class="card-body">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Unidad</th>
+                    <th>Cargo</th>
+                    <th>Extension</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+  
+                  <tr *ngFor="let extension of extensiones; let i= index;">
+                    <td>{{extension.id}}</td>
+                    <td>{{extension.nombre}}</td>
+                    <td>{{extension.unidad}}</td>
+                    <td>{{extension.cargo}}</td>
+                    <td>{{extension.extension}}</td>
+                    <td><button class="btn btn-warning btn-xs mr-2" (click)="llenarForm(extension.id)"><i class="fas fa-pencil-alt"></i></button> 
+                        <button class="btn btn-danger btn-xs" (click)="eliminarExtension(extension.id)"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
+<!-- Modal agregar Extension -->
+<div class="modal fade" id="agregarUsuario">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Extension</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="crearExtension()" [formGroup]="registerForm" autocomplete="off">
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user" style="color: rgb(48, 37, 37);"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Unidad" formControlName="unidad">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-tasks" style="color: rgb(48, 37, 37);"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Cargo" formControlName="cargo">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-address-book" style="color: rgb(48, 37, 37);;"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Extensión" formControlName="extension">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-phone" style="color: rgb(48, 37, 37);"></span>
+                </div>
+              </div>
+            </div>
+      
+            <div class="row">
+              <div class="col-8">
+                  <div class="col text-danger">
+                    <p *ngIf="campoNoValido('nombre')"> El Nombre es obligatorio</p>
+                    <p *ngIf="campoNoValido('unidad')"> La Unidad es obligatoria</p>
+                    <p *ngIf="campoNoValido('cargo')"> El Cargo es obligatorio</p>
+                    <p *ngIf="campoNoValido('extension')">La Extensón es obligatoria</p>
+                    
+                  </div>
+  
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+
+    </div>
+ </div>   
+ 
+  <!-- llenar editar usuario -->
+  <div class="modal fade" id="editarExtension">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Extensión</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="editarExtension()" [formGroup]="registerForm" autocomplete="off">
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user" style="color: rgb(48, 37, 37);"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Unidad" formControlName="unidad">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                </div>
+              </div>
+            </div>
+           
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cargo" formControlName="cargo">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Extensión" formControlName="extension">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row">
+              <div class="col-8">
+                  <div class="col text-danger">
+                    <p *ngIf="campoNoValido('nombre')"> El Nombre es obligatorio</p>
+                    <p *ngIf="campoNoValido('unidad')"> La Unidad es obligatorio</p>
+                    <p *ngIf="campoNoValido('cargo')"> El Cargo es obligatorio</p>
+                    <p *ngIf="campoNoValido('extension')"> La Extension es obligatorio</p>
+                  </div>
+  
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+
+    </div>
+ </div>

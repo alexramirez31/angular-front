@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Usuario } from '../models/usuario.model';
+import { UsuarioService } from '../services/usuario.service';
+
 
 @Component({
   selector: 'app-pages',
@@ -8,9 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
+
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
+
+
 
 }
