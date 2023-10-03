@@ -11,6 +11,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExtensionesComponent } from './extensiones/extensiones.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -38,7 +39,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
     RouterModule,
     DataTablesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ]
 })
 export class PagesModule { }

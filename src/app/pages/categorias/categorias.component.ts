@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { Categoria } from 'src/app/models/categoria.model';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import Swal from 'sweetalert2';
-import { log } from 'util';
 
 declare var $:any;
 
