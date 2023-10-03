@@ -15,23 +15,31 @@
               <thead>
                 <tr>
                   <th>id</th>
-                  <th>Nombre</th>
                   <th>Categoria</th>
-                  <th>stock</th>
+                  <th>nombre</th>
                   <th>imagen</th>
+                  <th>stock</th>
+                  <th>precio_compra</th>
+                  <th>precio_venta</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
 
-                <tr *ngFor="let usuario of productos; let i= index;">
-                  <td>{{i+1}}</td>
-                  <td>{{usuario.nombre}}</td>
-                  <td>{{usuario.email}}</td>
-                  <td><button class="btn btn-primary btn-xs" (click)="cambiarPass(usuario.id)"><i class="fas fa-key"></i> Cambio Password </button></td>
-                  <td>{{usuario.role}}</td>
-                  <td><button class="btn btn-warning btn-xs mr-2" (click)="llenarForm(usuario.id)"><i class="fas fa-pencil-alt"></i></button>
-                      <button class="btn btn-danger btn-xs" (click)="eliminarUsuario(usuario.id)"><i class="fas fa-trash-alt"></i></button>
+
+      
+                <tr *ngFor="let producto of productos; let i= index;">
+                  <td>{{producto.id}}</td>
+                  <td>{{producto.categoria}}</td>
+                  <td>{{producto.nombre}}</td>
+                  <td><img class="" width="50"  src="http://localhost:3000/{{producto.imagen}}"></td>
+                  <td>{{producto.stock}}</td>
+                  <td>{{producto.precio_compra}}</td>
+                  <td>{{producto.precio_venta}}</td>
+                  <!-- <td><button class="btn btn-primary btn-xs" (click)="cambiarPass(producto.id)"><i class="fas fa-key"></i> Cambio Password </button></td>
+                  <td>{{producto.nombre}}</td> -->
+                  <td><button class="btn btn-warning btn-xs mr-2" (click)="llenarForm(producto.id)"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-danger btn-xs" (click)="eliminarProducto(producto.id)"><i class="fas fa-trash-alt"></i></button>
                   </td>
               </tr>
               </tbody>
@@ -44,13 +52,19 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Agregar Categorias</h4>
+              <h4 class="modal-title">Agregar Productos</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <form (ngSubmit)="crearProducto()" [formGroup]="productoForm" autocomplete="off">
+                <div class="form-group mb-3">
+                  <select class="form-control" formControlName="id_categoria" >
+                    <option value="" selected>Seleccione la categoria</option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}</option>
+                  </select>            
+                </div>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
                   <div class="input-group-append">
@@ -59,8 +73,110 @@
                     </div>
                   </div>
                 </div>
+                <div class="input-group mb-3" hidden="hidden">
+                  <!-- <input type="text" class="form-control" placeholder="Nombre imagen" formControlName="imagen" > -->
+                  <span hidden="hidden">{{productoForm.get('imagen').value}}</span>
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-user" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Categoria" formControlName="categoria">
+                  <input type="text" class="form-control" placeholder="Stock" formControlName="stock">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">$</span>
+                  <input type="text" class="form-control" placeholder="Precio compra" formControlName="precio_compra">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">$</span>
+                  <input type="text" class="form-control" placeholder="Precio venta" formControlName="precio_venta">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+             
+                <div class="input-group mb-3">
+                  <label>Elegir Imagen</label>
+                  <input type="file" class="form-control-file"   accept="image/*" (change)="selectImage($event)">
+                  <!-- <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div> -->
+                </div>
+
+                <div class="input-group mb-3">
+                  <div class="card">
+                    <img class="card-img-top" [src]="imgURL">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-8">
+                    <div class="col text-danger">
+                      <p *ngIf="campoNoValido('nombre')"> El Nombre es Obligatorio</p>
+                      <p *ngIf="campoNoValido('id_categoria')">Debe Seleccionar una Categoria</p> 
+                      <p *ngIf="campoNoValido('stock')"> El Stock es Obligatorio</p>
+                      <p *ngIf="campoNoValido('precio_compra')"> El Precio de Compra es Obligatorio </p>
+                      <p *ngIf="campoNoValido('precio_venta')"> El Precio de Venta es Obligatorio </p>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- llenar editar Producto -->
+       <div class="modal fade" id="editarProducto">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Editar Producto</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="editarProducto()" [formGroup]="productoForm" autocomplete="off">
+                <div class="form-group mb-3">
+                  <select class="form-control" formControlName="id_categoria" >
+                    <option value="" selected>Seleccione la categoria</option>
+                    <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nombre}}</option>
+                  </select>            
+                </div>
+
+
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="nombre" formControlName="nombre">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3" hidden="hidden">
+                  <span hidden="hidden">{{productoForm.get('imagen').value}}</span>
+                  <!-- <input type="text" class="form-control" placeholder="imagen" formControlName="imagen"> -->
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
@@ -76,8 +192,26 @@
                   </div>
                 </div>
                 <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Precio Compra" formControlName="precio_compra">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Precio Venta" formControlName="precio_venta">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
                   <label>Elegir Imagen</label>
-                  <input type="file" class="form-control-file"  formControlName="image" accept="image/*" (change)="selectImage($event)">
+                  
+                  <input type="file" class="form-control-file" #file_editar  accept="image/*" (change)="selectImageEditar($event)">
                   <!-- <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-envelope" style="color: rgb(48, 37, 37);"></span>
@@ -87,28 +221,29 @@
 
                 <div class="input-group mb-3">
                   <div class="card">
-                    <img class="card-img-top" [src]="imgURL" >
+                    <img class="card-img-top" #img_editar src="{{imgURL_editar}}" (load)="loadimage($event)" >
                   </div>
-
-                  
                 </div>
 
                 <div class="row">
                   <div class="col-8">
                     <div class="col text-danger">
-                      <p *ngIf="campoNoValido('nombre')"> El Nombre es obligatorio</p>
-                      <p *ngIf="campoNoValido('categoria')"> El Descripcion es obligatorio</p>
-                      <p *ngIf="campoNoValido('stock')"> El Nombre es obligatorio</p>
-                      <p *ngIf="campoNoValido('image')"> El Descripcion es obligatorio</p>
-                    </div>
+                      <!-- <p *ngIf="campoNoValido('nombre')"> El Nombre es obligatorio</p>
+                      <p *ngIf="campoNoValido('descripcion')">La Descripcion es obligatoria</p> -->
+                     </div>
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" (click)="limpiar_imagen()">Limpiar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                   </div>
                 </div>
               </form>
             </div>
+
           </div>
+
         </div>
       </div>
+
+     

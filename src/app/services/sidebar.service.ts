@@ -27,7 +27,7 @@ export class SidebarService {
 
   menu2: any[] = [{
 
-    titulo: 'categoria',
+    titulo: 'Categoria',
     icono: '"nav-icon fas fa fa-th-list',
     submenu: [
       { titulo: 'Categorias', url: 'categorias' },
@@ -37,7 +37,7 @@ export class SidebarService {
 
   menu3: any[] = [{
 
-    titulo: 'productos',
+    titulo: 'Productos',
     icono: '"nav-icon fas fa fa-th-list',
     submenu: [
       { titulo: 'Productos', url: 'productos' },

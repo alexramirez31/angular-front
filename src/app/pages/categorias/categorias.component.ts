@@ -81,7 +81,7 @@ export class CategoriasComponent implements OnInit {
   }
 
   editarCategoria(){
-     let nombre_guardar =this.categoriaForm.get("nombre").value;
+    let nombre_guardar =this.categoriaForm.get("nombre").value;
     let descripcion_guardar = this.categoriaForm.get("descripcion").value
    
    if (nombre_guardar !='' && descripcion_guardar !='' ) {

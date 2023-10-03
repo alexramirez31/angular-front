@@ -14,6 +14,7 @@ declare var $:any;
 export class SidebarComponent implements OnInit {
 
   perfil = localStorage.getItem('nombre');
+  role= localStorage.getItem('role');
 
   menuItems: any[]; //dasboard
   menuItems1: any[]; //usuarios
@@ -37,6 +38,7 @@ export class SidebarComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('usuarioId');
     localStorage.removeItem('nombre');
+    localStorage.removeItem('role');
     this.router.navigateByUrl('/login');
   }
 

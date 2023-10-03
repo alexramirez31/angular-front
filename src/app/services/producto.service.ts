@@ -13,10 +13,42 @@ export class ProductoService {
 
   constructor(private http:HttpClient) { }
 
-  newProducto(formData:AgregarProductoForm){
-    return this.http.post(`${URL}/file`,formData,{responseType: 'text'});
+
+  obtenerProductos(){
+    let headers= new HttpHeaders({
+      'token':localStorage.getItem('token')
+  
+    });
+    return this.http.post(`${URL}/productos/obtener`,{headers});
   
   }
 
+  obtenerProductosID(id:string){
+    let headers= new HttpHeaders({
+      'token':localStorage.getItem('token')
+    });
+    return this.http.post(`${URL}/productos/obtener/${id}`,{headers});
+  
+  }
+
+  newProducto(formData:AgregarProductoForm){
+    return this.http.post(`${URL}/productos/agregar`,formData,{responseType: 'text'});
+  
+  }
+
+  editProducto(id:string,formData:AgregarProductoForm){
+    return this.http.post(`${URL}/productos/editar/${id}`,formData,{responseType: 'text'});
+  
+  }
+
+  deleteProducto(id:string){
+
+    let headers = new HttpHeaders({
+      //'token': this.token
+      'token':localStorage.getItem('token')
+    });
+    return this.http.delete(`${URL}/productos/delete/${id}`,{headers});
+  
+  }
 
 }

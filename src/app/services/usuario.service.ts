@@ -27,6 +27,7 @@ login(formData:LoginForm){
     localStorage.setItem('token',res.token);
     localStorage.setItem('usuarioId',res.usuario.id);
     localStorage.setItem('nombre',res.usuario.nombre);
+    localStorage.setItem('role',res.usuario.role);
   }));
 }
 

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { NopageFoundComponent } from './nopage-Found/nopage-found/nopage-found.component';
 import { AuthModule } from './auth/auth.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     PagesModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
