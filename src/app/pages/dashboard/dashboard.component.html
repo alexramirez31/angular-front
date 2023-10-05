@@ -1,12 +1,11 @@
-<div><canvas baseChart
+<!-- <div><canvas baseChart
     [datasets]="barChartData"
     [labels]="barChartLabels"
     [options]="barChartOptions"
     [plugins]="barChartPlugins"
     [legend]="barChartLegend"
     [chartType]="barChartType">
-  </canvas></div>
-
+  </canvas></div> -->
 
 <div class="card">
   <div class="card-header">
@@ -27,6 +26,24 @@
     <div class="row">
       <div class="col-sm-3">
         <div class="card text-white bg-primary ml-5   mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">Productos</div>
+          <div class="card-body bg-light">
+            <h1 class="card-text text-center">{{producto_total.cantidad_producto}}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="card text-white bg-success ml-5   mb-3" style="max-width: 18rem;">
+          <div class="card-header text-center">Categorias</div>
+          <div class="card-body bg-light">
+            <h1 class="card-text text-center">{{categorias_total.cantidad_categorias}}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="card text-white bg-warning ml-5   mb-3" style="max-width: 18rem;">
           <div class="card-header text-center">Usuarios</div>
           <div class="card-body bg-light">
             <h1 class="card-text text-center">16</h1>
@@ -35,25 +52,7 @@
       </div>
 
       <div class="col-sm-3">
-        <div class="card text-white bg-primary ml-5   mb-3" style="max-width: 18rem;">
-          <div class="card-header text-center">Usuarios</div>
-          <div class="card-body bg-light">
-            <h1 class="card-text text-center">16</h1>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-3">
-        <div class="card text-white bg-primary ml-5   mb-3" style="max-width: 18rem;">
-          <div class="card-header text-center">Usuarios</div>
-          <div class="card-body bg-light">
-            <h1 class="card-text text-center">16</h1>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-3">
-        <div class="card text-white bg-primary ml-5   mb-3" style="max-width: 18rem;">
+        <div class="card text-white bg-danger ml-5   mb-3" style="max-width: 18rem;">
           <div class="card-header text-center">Usuarios</div>
           <div class="card-body bg-light">
             <h1 class="card-text text-center">16</h1>
@@ -62,6 +61,42 @@
       </div>
     </div>
   </div>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <ngx-charts-advanced-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="single"
+            [gradient]="gradient"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
+            >
+        </ngx-charts-advanced-pie-chart>
+      </div> 
+
+      <div class="col-sm-6">
+        <h1 class="text-center">Grafico de Productos</h1>
+        <ngx-charts-gauge
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [legend]="legend"
+        [legendPosition]="legendPosition"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        >
+      </ngx-charts-gauge>
+      </div> 
+    </div>
+  </div> 
+  
+
+
 
   <!-- /.card-body -->
   <div class="card-footer">

@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.17",
+    "@angular/cdk": "^12.0.0",
     "@angular/common": "~12.2.17",
     "@angular/compiler": "~12.2.17",
     "@angular/core": "~12.2.17",
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "~12.2.17",
     "@angular/platform-browser-dynamic": "~12.2.17",
     "@angular/router": "~12.2.17",
+    "@swimlane/ngx-charts": "^19.0.0",
     "angular-datatables": "^6.0.0",
     "chart.js": "^2.9.4",
     "datatables.net": "^1.13.6",

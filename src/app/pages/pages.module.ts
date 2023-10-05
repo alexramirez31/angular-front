@@ -12,9 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExtensionesComponent } from './extensiones/extensiones.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ChartsModule } from 'ng2-charts';
-
-
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -40,7 +38,9 @@ import { ChartsModule } from 'ng2-charts';
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule
+    ChartsModule,
+    NgxChartsModule,
+
   ]
 })
 export class PagesModule { }

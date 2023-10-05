@@ -7,9 +7,9 @@ export class SidebarService {
 
   menu: any[] = [{
     titulo: 'Dashboard',
-    icono: '"nav-icon fas fa-user-alt',
+    icono: '"nav-icon fas fa-tachometer-alt',
     submenu: [
-      { titulo: 'Usuarios', url: 'usuarios' },
+      { titulo: 'Dashboard', url: 'dashboard' },
     ]
 
   }];
@@ -28,7 +28,7 @@ export class SidebarService {
   menu2: any[] = [{
 
     titulo: 'Categoria',
-    icono: '"nav-icon fas fa fa-th-list',
+    icono: '"nav-icon fas  fa-qrcode',
     submenu: [
       { titulo: 'Categorias', url: 'categorias' },
      
@@ -38,7 +38,7 @@ export class SidebarService {
   menu3: any[] = [{
 
     titulo: 'Productos',
-    icono: '"nav-icon fas fa fa-th-list',
+    icono: '"nav-icon fa fa-cart-plus',
     submenu: [
       { titulo: 'Productos', url: 'productos' },
       { titulo: 'Stock', url: 'stock' },
