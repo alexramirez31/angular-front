@@ -13,6 +13,8 @@ import { ExtensionesComponent } from './extensiones/extensiones.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ErrorComponent } from './error/error.component';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     StockComponent,
     ExtensionesComponent,
     CategoriasComponent,
+    ErrorComponent,
   ],
   exports: [
     DashboardComponent,
@@ -39,7 +42,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
-    NgxChartsModule,
+    NgxChartsModule
+    
 
   ]
 })

@@ -12,6 +12,46 @@
   <div class="card-body">
     Start creating your amazing application!
   </div>
+
+  <div class="container">
+    <h1>Tabs</h1>
+    <!-- TABS CONTAINER -->
+    <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
+      <!-- TAB1 -->
+      <a
+        class="w-100 nav-item nav-link"
+        [routerLink]="['/dashboard/usuarios']" 
+        routerLinkActive="active"
+        style="flex: 1"
+      >
+        Landing
+      </a>
+      <!-- TAB2 -->
+      <a
+        class="w-100 nav-item nav-link"
+        [routerLink]="['/dashboard/extensiones']" 
+        routerLinkActive="active"
+        style="flex: 1"
+      >
+        Page1
+      </a>
+      <!-- TAB3 -->
+      <a
+        class="w-100 nav-item nav-link"
+        routerLink="/page-2"
+        routerLinkActive="active"
+        style="flex: 1"
+      >
+        Page2
+      </a>
+    </div>
+ <!-- Router outlet -->
+ <router-outlet></router-outlet>
+ 
+</div>  
+  
+
+
   <!-- /.card-body -->
   <div class="card-footer">
     Footer

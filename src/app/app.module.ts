@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ChartsModule } from "ng2-charts";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { ChartsModule } from "ng2-charts";
     HttpClientModule,
     AuthModule,
     ChartsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

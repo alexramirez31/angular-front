@@ -8,6 +8,7 @@ import { StockComponent } from './stock/stock.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { ExtensionesComponent } from './extensiones/extensiones.component';
 import { CategoriasComponent } from './categorias/categorias.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,11 @@ const routes: Routes = [
       { path: 'extensiones', component: ExtensionesComponent, data: { titulo: 'Extensiones' } },
       { path: 'categorias', component: CategoriasComponent, data: { titulo: 'Categorias' } },
       { path: 'productos', component: ProductosComponent, data: { titulo: 'Productos' } },
-      { path: 'stock', component: StockComponent, data: { titulo: 'Stock' } },
-    ]
-  }
+      { path: 'stock', component: StockComponent, data: { titulo: 'Stock' }},
+      { path: '**', component: ErrorComponent  },
+    ]},
+    
+  
 ];
 
 @NgModule({

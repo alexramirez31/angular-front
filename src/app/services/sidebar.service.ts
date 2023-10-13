@@ -20,7 +20,7 @@ export class SidebarService {
     submenu: [
       { titulo: 'Usuarios', url: 'usuarios' },
       { titulo: 'Extensiones', url: 'extensiones' },
-  
+      { titulo: 'Registrar', url: 'register' },
     ]
 
   }];

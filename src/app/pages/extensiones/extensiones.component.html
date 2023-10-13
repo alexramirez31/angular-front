@@ -5,13 +5,20 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Lista de Extensiones</h3> <br>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuario">
+              <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#agregarUsuario">
                 <i class="fas fa-user-plus"></i> Agregar
               </button>
+              <button type="button"  class="btn btn-success  mr-2"  data-toggle="modal" (click)="exportexcel()">
+                <i class="fas fa-file-excel"></i> Exportar
+              </button>
+              <button type="button"  class="btn btn-info "  data-toggle="modal" (click)="onImprimir()">
+                <i class="fa fa-print" ></i> Imprimir
+              </button>
+              
             </div>
   
             <div class="card-body">
-              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <table id="excel-table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
                 <thead>
                   <tr>
                     <th>#</th>

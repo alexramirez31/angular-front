@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 import { ExtensionService } from '../../services/extension.service';
 import Swal from 'sweetalert2';
 import { Extension } from 'src/app/models/extension.model';
+import * as XLSX from 'xlsx'
+import { ImprimirService } from 'src/app/services/imprimir.service';
 
 declare var $:any;
 
@@ -24,6 +26,11 @@ export class ExtensionesComponent implements OnInit {
  
   id_extension:number=0;
 
+  //excell
+  title='agular-app';
+  fileName='ExcelSheet.xlsx';
+
+
   public registerForm = this.fb.group({
     nombre:['',[Validators.required]],
     unidad:['',[Validators.required]],
@@ -32,7 +39,12 @@ export class ExtensionesComponent implements OnInit {
   
   })
 
-  constructor( private extensionSvc: ExtensionService,private fb:FormBuilder,private router:Router) { }
+  constructor( 
+    private extensionSvc: ExtensionService,
+    private fb:FormBuilder,
+    private router:Router,
+    private srvImprimir: ImprimirService
+    ) { }
 
   ngOnInit(): void {
     this.obtenerExtension();
@@ -49,7 +61,6 @@ export class ExtensionesComponent implements OnInit {
   obtenerExtension(){
     this.extensionSvc.obtenerExtensiones().subscribe((res:any) =>{
       this.extensiones=res;
-     
       this.dtTrigger.next();
     });
   }
@@ -178,6 +189,45 @@ export class ExtensionesComponent implements OnInit {
     }
 
   }
+
+  exportexcel():void{
+    let element = document.getElementById('excel-table');
+    const ws:XLSX.WorkSheet=XLSX.utils.table_to_sheet(element);
+
+    const wb:XLSX.WorkBook=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+
+    XLSX.writeFile(wb,this.fileName);
+
+  }
+
+  onImprimir(){
+    const encabezado=['Nombre','Unidad','Cargo','Extension']
+   // const cuerpo=['alex ramirez','tics','desarrollador','1010']
+  // console.log(this.extensiones);
+   
+
+    // const cuerpo=this.extensiones.map(record => {
+    //   return [record.nombre, record.unidad, record.cargo, record.extension]
+    // })
+
+   
+    const cuerpo= Object(this.extensiones).map(function(obj:any){
+      const datos=[
+        String(obj.nombre),
+        String(obj.unidad),
+        String(obj.cargo),
+        String(obj.extension)
+      ]
+      console.log(datos)
+      return datos;
+     
+    })
+    
+
+    this.srvImprimir.imprimir(encabezado,cuerpo,'Lista de Extensiones');
+  }
+
 
 
 }
